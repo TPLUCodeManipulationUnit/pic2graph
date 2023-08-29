@@ -179,23 +179,21 @@ async function copyToClipboard() {
 function getLineEquation(line) {
     if (line.dir == 0) {
         return (
-            "x = " +
+            "\left(x- " +
             line.offset +
-            "\\left\\{" +
+            "\right)^{2}+\left(y-" +
             line.start +
-            "\\le y \\le" +
+            "\right)^{2}<" +
             line.end +
-            "\\right\\}\n"
         );
     } else {
         return (
-            "y = " +
+            "\left(x- " +
             line.offset +
-            "\\left\\{" +
+            "\right)^{2}+\left(y-" +
             line.start +
-            "\\le x \\le" +
+            "\right)^{2}<" +
             line.end +
-            "\\right\\}\n"
         );
     }
 }
