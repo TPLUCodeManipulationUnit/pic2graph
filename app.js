@@ -46,56 +46,56 @@ function processImg() {
 
         // horizontal lines
 
-        for (let y = 0; y < pixels.height; y++) {
-            let hasLine = false;
-            let lineStart = -1;
-            for (let x = 0; x < pixels.width; x++) {
-                let pixLine = false;
-                for (let k = 0; k < 4; k++) {
-                    if (
-                        Math.abs(getPixel(x, y, k) - getPixel(x, y + 1, k)) >=
-                        thresh
-                    ) {
-                        pixLine = true;
-                        break;
-                    }
-                }
+        // for (let y = 0; y < pixels.height; y++) {
+        //     let hasLine = false;
+        //     let lineStart = -1;
+        //     for (let x = 0; x < pixels.width; x++) {
+        //         let pixLine = false;
+        //         for (let k = 0; k < 4; k++) {
+        //             if (
+        //                 Math.abs(getPixel(x, y, k) - getPixel(x, y + 1, k)) >=
+        //                 thresh
+        //             ) {
+        //                 pixLine = true;
+        //                 break;
+        //             }
+        //         }
 
-                if (pixLine) {
-                    if (!hasLine) {
-                        hasLine = true;
-                        lineStart = getX(x);
-                    }
-                } else {
-                    if (hasLine) {
-                        lines.push({
-                            dir: 1,
-                            offset: getY(y) - 1,
-                            start: lineStart,
-                            end: getX(x),
-                        });
-                        if (lines.length >= 5000) {
-                            document.getElementById("filename").innerText =
-                                "Image too complex!";
-                            return;
-                        }
+        //         if (pixLine) {
+        //             if (!hasLine) {
+        //                 hasLine = true;
+        //                 lineStart = getX(x);
+        //             }
+        //         } else {
+        //             if (hasLine) {
+        //                 lines.push({
+        //                     dir: 1,
+        //                     offset: getY(y) - 1,
+        //                     start: lineStart,
+        //                     end: getX(x),
+        //                 });
+        //                 if (lines.length >= 5000) {
+        //                     document.getElementById("filename").innerText =
+        //                         "Image too complex!";
+        //                     return;
+        //                 }
 
-                        hasLine = false;
-                    }
-                }
-            }
+        //                 hasLine = false;
+        //             }
+        //         }
+        //     }
 
-            if (hasLine) {
-                lines.push({
-                    dir: 1,
-                    offset: getY(y) - 1,
-                    start: lineStart,
-                    end: getX(pixels.width),
-                });
+        //     if (hasLine) {
+        //         lines.push({
+        //             dir: 1,
+        //             offset: getY(y) - 1,
+        //             start: lineStart,
+        //             end: getX(pixels.width),
+        //         });
 
-                hasLine = false;
-            }
-        }
+        //         hasLine = false;
+        //     }
+        // }
 
         // vertical lines
         for (let x = 0; x < pixels.width; x++) {
@@ -127,15 +127,15 @@ function processImg() {
                             end: getY(y) - 1,
                         });
 
-                        if (lines.length >= 5000) {
-                            document.getElementById("filename").innerText =
-                                "Image too complex!";
+                        // if (lines.length >= 5000) {
+                        //     document.getElementById("filename").innerText =
+                        //         "Image too complex!";
 
-                            output.value =
-                                "Image too complex! Try to reduce the resolution of the image.";
+                        //     output.value =
+                        //         "Image too complex! Try to reduce the resolution of the image.";
 
-                            return;
-                        }
+                        //     return;
+                        // }
 
                         hasLine = false;
                     }
@@ -182,9 +182,9 @@ function getLineEquation(line) {
     if (line.dir == 0) {
         return (
             "\\left(x+" +
-            line.offset +
+            (-1) * line.offset +
             "\\right)^{2}+\\left(y+" +
-            line.start +
+            (-1) * line.start +
             "\\right)^{2}=" +
             //Math.abs(line.end) +
             4 +
@@ -193,9 +193,9 @@ function getLineEquation(line) {
     } else {
         return (
             "\\left(x+" +
-            line.offset +
+            (-1) * line.offset +
             "\\right)^{2}+\\left(y+" +
-            line.start +
+            (-1) * line.start +
             "\\right)^{2}=" +
             //Math.abs(line.end) +
             4 +
