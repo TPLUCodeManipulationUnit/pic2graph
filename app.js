@@ -8,6 +8,7 @@ function processImg() {
     var ctx = canvas.getContext("2d");
     var reader = new FileReader();
     var img = new Image();
+    var counter = 
 
     reader.addEventListener("load", () => {
         img.src = reader.result;
@@ -157,6 +158,7 @@ function processImg() {
         output.value = "";
 
         lines.forEach((line) => {
+          
             output.value += getLineEquation(line);
         });
 
@@ -179,21 +181,25 @@ async function copyToClipboard() {
 function getLineEquation(line) {
     if (line.dir == 0) {
         return (
-            "\\left(x-" +
+            "\\left(x+" +
             line.offset +
-            "\\right)^{2}+\\left(y-" +
+            "\\right)^{2}+\\left(y+" +
             line.start +
-            "\\right)^{2}<" +
-            line.end 
+            "\\right)^{2}=" +
+            //Math.abs(line.end) +
+            4 +
+            "\n"
         );
     } else {
         return (
-            "\\left(x-" +
+            "\\left(x+" +
             line.offset +
-            "\\right)^{2}+\\left(y-" +
+            "\\right)^{2}+\\left(y+" +
             line.start +
-            "\\right)^{2}<" +
-            line.end 
+            "\\right)^{2}=" +
+            //Math.abs(line.end) +
+            4 +
+            "\n"
         );
     }
 }
